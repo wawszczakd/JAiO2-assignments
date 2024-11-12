@@ -1,0 +1,70 @@
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{indentfirst}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{natbib}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage[a4paper, margin = 2 cm]{geometry}
+\usepackage{fancyhdr}
+\usepackage{wrapfig}
+\usepackage{hyperref}
+\usepackage{mathtools}
+
+\title{Languages, Automata and Computation II assignment 1}
+\author{Dominik Wawszczak}
+\date{2024-11-12}
+
+\begin{document}
+	\setlength{\parindent}{0 cm}
+	
+	Dominik Wawszczak \hfill Languages, Automata and Computation II
+	
+	Student ID Number: 440014 \hfill Assignment 1
+	
+	Group Number: 1
+	
+	\bigskip
+	\hrule
+	\bigskip
+	
+	\textbf{Problem 1}
+	
+	\medskip
+	
+	We define an \(\omega\)-word \(u\) as \textit{universal} if, and only if,
+	for any \(i \in \mathbb{N}\), there exists a \(j > i\) such that \(u[i] \neq
+	u[j]\). Intuitively, this means that \(u\) contains an infinite subsequence
+	of the form \((ab)^{\infty}\). Note that if \(u \in \Sigma^{\omega}\) is
+	universal, then for any \(v \in \Sigma^{\omega}\), it holds that \(v
+	\sqsubseteq u\). This is because we can remove finitely or infinitely many
+	letters from \(u\) to obtain \((ab)^{\infty}\), and for each \(i\)-th pair
+	of consecutive \(ab\) occurrences, we can remove either \(a\) or \(b\),
+	depending on the value of \(v[i]\).
+	
+	\medskip
+	
+	If an \(\omega\)-word \(u\) is not universal, then either \(\#_{a}(u)\) or
+	\(\#_{b}(u)\) is finite. In the first case, \(u\) is of the form
+	\(vb^{\infty}\), and we will refer to such an \(\omega\)-word as
+	\textit{\(a\)-long}. In the second case, \(u\) is of the form
+	\(va^{\infty}\), and we will call it \textit{\(b\)-long}. In both cases,
+	\(v\) is a word of finite length.
+	
+	\medskip
+	
+	Let \(u_{1}, u_{2}, \ldots\) be any infinite sequence of \(\omega\)-words.
+	We will prove that there exist indices \(i < j\) such that \(u_{i}
+	\sqsubseteq u_{j}\). If there are at least two universal \(\omega\)-words in
+	this sequence, the proof is straightforward since \(u_{1}\) can embed into
+	the second universal word in the sequence. Otherwise, either there are
+	infinitely many \(a\)-long words in the sequence, or there are infinitely
+	many \(b\)-long words. Without loss of generality, assume there are
+	infinitely many \(a\)-long words in the sequence. Let \(k_{1}, k_{2},
+	\ldots\) be the indices of the \(a\)-long words. Denote \(u_{k_{l}} =
+	u_{k_{l}}'a^{\infty}\), where \(u_{k_{l}}'\) is finite. By Higman's lemma,
+	there exist indices \(i < j\) such that \(u_{k_{i}}'\) is a substring of
+	\(u_{k_{j}}'\), concluding the proof as \(u_{k_{i}} \sqsubseteq u_{k_{j}}\).
+\end{document}

@@ -67,4 +67,42 @@
 	u_{k_{l}}'a^{\infty}\), where \(u_{k_{l}}'\) is finite. By Higman's lemma,
 	there exist indices \(i < j\) such that \(u_{k_{i}}'\) is a substring of
 	\(u_{k_{j}}'\), concluding the proof as \(u_{k_{i}} \sqsubseteq u_{k_{j}}\).
+	
+	\medskip
+	
+	Now, we will show that in the variant where only finitely many letters can
+	be removed, the resulting relation is not a well-quasi order. Consider the
+	infinite sequence of \(\omega\)-words \(u_{1}, u_{2}, \ldots\) such that
+	\[ u_{i} \ = \ a^{i} b a^{i + 1} b a^{i + 2} b \ldots \]
+	
+	Clearly, for any \(i \in \mathbb{N}^{+}\), we have \(u_{i} \sqsupseteq
+	u_{i + 1}\) because the first \(i + 1\) letters of \(u_{i}\) can be removed
+	to obtain \(u_{i + 1}\).
+	
+	\medskip
+	
+	Suppose, for the sake of contradiction, that there exists \(i \in
+	\mathbb{N}^{+}\) such that \(u_{i} \sqsubseteq u_{i + 1}\). Let \(k\) be the
+	smallest number such that a non expandable block of the form \(a^{k} b\)
+	remains intact, after removing finitely many letters from \(u_{i + 1}\) to
+	obtain \(u_{i}\). The number of letters \(b\) in \(u_{i + 1}\) before this
+	block equals \(k - i - 1\). However, the number of letters \(b\) in
+	\(u_{i}\) before this block equals \(k - i > k - i - 1\), which is a
+	contradiction, as letters can only be removed.
+	
+	Suppose, for the sake of contradiction, that there exists \(i \in
+	\mathbb{N}^{+}\) such that \(u_{i} \sqsubseteq u_{i + 1}\). Let \(k\) be the
+	smallest number such that a non-expandable block of the form \(a^{k} b\)
+	remains intact after removing finitely many letters from \(u_{i + 1}\) to
+	obtain \(u_{i}\). The number of \(b\) letters in \(u_{i + 1}\) before this
+	block is \(k - i - 1\). However, the number of \(b\) letters in \(u_{i}\)
+	before this block is \(k - i\), which is greater than \(k - i - 1\),
+	contradicting the fact that letters can only be removed.
+	
+	\medskip
+	
+	From the above, we conclude that \(u_{i} \sqsupset u_{i + 1}\) for any \(i
+	\in \mathbb{N}^{+}\). Therefore, \(u_{1}, u_{2}, \ldots\) forms an infinite
+	sequence of strictly decreasing elements, which shows that the relation is
+	not a well-quasi order.
 \end{document}

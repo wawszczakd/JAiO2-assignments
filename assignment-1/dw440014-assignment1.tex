@@ -71,7 +71,7 @@
 	\medskip
 	
 	Now, we will show that in the variant where only finitely many letters can
-	be removed, the resulting relation is not a well-quasi order. Consider the
+	be removed, the resulting relation is not a well-quasi-order. Consider the
 	infinite sequence of \(\omega\)-words \(u_{1}, u_{2}, \ldots\) such that
 	\[ u_{i} \ = \ a^{i} b a^{i + 1} b a^{i + 2} b \ldots \]
 	
@@ -90,6 +90,8 @@
 	\(u_{i}\) before this block equals \(k - i > k - i - 1\), which is a
 	contradiction, as letters can only be removed.
 	
+	\medskip
+	
 	Suppose, for the sake of contradiction, that there exists \(i \in
 	\mathbb{N}^{+}\) such that \(u_{i} \sqsubseteq u_{i + 1}\). Let \(k\) be the
 	smallest number such that a non-expandable block of the form \(a^{k} b\)
@@ -104,5 +106,107 @@
 	From the above, we conclude that \(u_{i} \sqsupset u_{i + 1}\) for any \(i
 	\in \mathbb{N}^{+}\). Therefore, \(u_{1}, u_{2}, \ldots\) forms an infinite
 	sequence of strictly decreasing elements, which shows that the relation is
-	not a well-quasi order.
+	not a well-quasi-order.
+	
+	\newpage
+	
+	\textbf{Problem 2}
+	
+	\medskip
+	
+	For any set \(A \subseteq \{1, \ldots, d\}\), define a function \(f_{A} :
+	\mathbb{N} \to \mathbb{N}^{d}\) as follows:
+	\[ f_{A}(n) \ = \ ([1 \in A] \cdot n, \ldots, [d \in A] \cdot n) \text{,} \]
+	where \([P]\) denotes the Iverson bracket, i.e., \([P] = 1\) if \(P\) is
+	true, and \([P] = 0\) otherwise. A set \(A\) is called \textit{good} if and
+	only if \(f_{A}(n) \in X\) for every \(n \in \mathbb{N}\). Note that
+	\(\emptyset\) is good unless \(X\) is empty, which is a trivial case.
+	
+	\medskip
+	
+	For any good set \(A \subseteq \{1, \ldots, d\}\), let \(g(A)\) denote the
+	set of tuples \((a_{1}, \ldots, a_{d})\) satisfying the following conditions:
+	\begin{enumerate}
+		\item \(a_{i} = 0\), if \(i \in A\);
+		\item \(\underset{n \in \mathbb{N}}{\forall} \ (a_{1}, \ldots, a_{d}) +
+		      f_{A}(n) \in X\);
+		\item \(\underset{n_{0} \in \mathbb{N}}{\exists} \ \underset{n \geqslant
+		      n_{0}}{\forall} \ \underset{i \in \{1, \ldots, d\} \setminus A}
+		      {\forall} \ (a_{1}, \ldots, a_{i - 1}, a_{i} + 1, a_{i + 1},
+		      \ldots, a_{d}) + f_{A}(n) \notin X\),
+	\end{enumerate}
+	where \((a_{1}, \ldots, a_{d}) + (b_{1}, \ldots, b_{d}) = (a_{1} + b_{1},
+	\ldots, a_{d} + b_{d})\), for any tuples \((a_{1}, \ldots, a_{d})\) and
+	\((b_{1}, \ldots, b_{d})\) in \(\mathbb{N}^{d}\).
+	
+	\medskip
+	
+	Suppose, for the sake of contradiction, that \(g(A)\) is infinite. Let
+	\[ g(A) \ = \ \big\{ \big( a_{1}^{1}, \ldots, a_{d}^{1} \big), \big(
+	a_{1}^{2}, \ldots, a_{d}^{2} \big), \ldots \big\} \]
+	By Dickson's lemma, the structure \(\big( \mathbb{N}^{d}, \leqslant \!\!
+	\big)\) is a well-quasi-order.  Therefore, there exist indices \(i, j \in
+	\mathbb{N}\) such that \(i < j\) and \(\big( a_{1}^{i}, \ldots, a_{d}^{i}
+	\big) \leqslant \big( a_{1}^{j}, \ldots, a_{d}^{j} \big)\), contradicting
+	the third condition for tuples in \(g(A)\).
+	
+	\medskip
+	
+	Define \(\text{down}(g(A))\) as the set of all tuples \((b_{1}, \ldots,
+	b_{d}) \in \mathbb{N}^{d}\) such that there exists a tuple \((a_{1}, \ldots,
+	a_{d}) \in g(A)\) with \((a_{1}, \ldots, a_{d}) \geqslant (b_{1}, \ldots,
+	b_{d})\). If \(g(A)\) is empty, let \(\text{down}(g(A))\) be the singleton
+	containing the zero tuple.
+	
+	\medskip
+	
+	The set \(\text{down}(g(A))\) is finite, with the following upper bound on
+	its size:
+	\[ |\text{down}(g(A))| \ \leqslant \ \sum\limits_{(a_{1}, \ldots, a_{d}) \in
+	g(A)} \ \prod\limits_{i = 1}^{d} (a_{i} + 1) \text{.} \]
+	Using this, define a semilinear set
+	\[ Y \ = \ \bigcup_{A \subseteq \{1, \ldots, d\} \ \wedge \ A \
+	\text{is good}} \left( \text{down}(g(A)) + \left( \bigcup_{i \in A}
+	([1 = i], \ldots, [d = i]) \right)^{\ast} \right) \text{.} \]
+	By definition of \(g(A)\), we have \(Y \subseteq X\). Our goal is to show
+	that \(Y = X\).
+	
+	\medskip
+	
+	Suppose, for the sake of contradiction, that there exists a tuple \((a_{1},
+	\ldots, a_{d}) \in X \setminus Y\). We will construct a tuple \((b_{1},
+	\ldots, b_{d}) \in X\) such that \((b_{1}, \ldots, b_{d}) \geqslant (a_{1},
+	\ldots, a_{d})\). Since \(Y\) is downward closed, this will imply \((b_{1},
+	\ldots, b_{d}) \in X \setminus Y\).
+	
+	\medskip
+	
+	Proceed through indices \(i = 1, \ldots, d\), choosing \(b_{i}\) iteratively
+	while maintaining a set \(A\), initially empty. Assume \(b_{1}, \ldots,
+	b_{i - 1}\) have been chosen. For all \(j \in \{1, \ldots, i - 1\}\), define
+	\(b_{j}' = b_{j}\) if \(j \in A\), and \(b_{j}' = 0\) otherwise. If there
+	exists a number \(c_{i} \in \mathbb{N}\) such that
+	\begin{itemize}
+		\item \(\underset{n \in \mathbb{N}}{\forall} \ (b_{1}', \ldots,
+		      b_{i - 1}', c_{i}, a_{i + 1}, \ldots, a_{d}) + f_{A}(n) \in X\),
+		      and
+		\item \(\underset{n_{0} \in \mathbb{N}}{\exists} \ \underset{n \geqslant
+		      n_{0}}{\forall} \ (b_{1}', \ldots, b_{i - 1}', c_{i} + 1,
+		      a_{i + 1}, \ldots, a_{d}) + f_{A}(n) \notin X\),
+	\end{itemize}
+	set \(b_{i} = c_{i}\). Otherwise, let \(b_{i} = a_{i}\) and add \(i\) to
+	\(A\). Note that \(b_{i} \geqslant a_{i}\).
+	
+	\medskip
+	
+	By construction, \((b_{1}, \ldots, b_{d}) \in X\), and \(A\) is good.
+	Furthermore,
+	\[ \underset{n_{0} \in \mathbb{N}}{\exists} \ \underset{n \geqslant n_{0}}
+	{\forall} \ \underset{i \in \{1, \ldots, d\} \setminus A} {\forall} \
+	(b_{1}, \ldots, b_{i - 1}, b_{i} + 1, b_{i + 1}, \ldots, b_{d}) + f_{A}(n)
+	\notin X \text{.} \]
+	Thus,
+	\[ (b_{1}, \ldots, b_{d}) \ \in \ \text{down}(g(A)) + \left(
+	\bigcup_{i \in A} ([1 = i], \ldots, [d = i]) \right)^{\ast} \text{.} \]
+	This contradiction completes the proof that \(X\) is a semilinear set.
 \end{document}

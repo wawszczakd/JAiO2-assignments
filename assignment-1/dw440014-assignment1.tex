@@ -12,6 +12,8 @@
 \usepackage{wrapfig}
 \usepackage{hyperref}
 \usepackage{mathtools}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
 
 \title{Languages, Automata and Computation II assignment 1}
 \author{Dominik Wawszczak}
@@ -108,105 +110,166 @@
 	sequence of strictly decreasing elements, which shows that the relation is
 	not a well-quasi-order.
 	
-	\newpage
+	\bigskip
 	
 	\textbf{Problem 2}
 	
 	\medskip
 	
-	For any set \(A \subseteq \{1, \ldots, d\}\), define a function \(f_{A} :
-	\mathbb{N} \to \mathbb{N}^{d}\) as follows:
-	\[ f_{A}(n) \ = \ ([1 \in A] \cdot n, \ldots, [d \in A] \cdot n) \text{,} \]
+	Consider the structure \(\big( (\mathbb{N} \cup \{\omega\})^{d}, \leqslant
+	\! \big)\), where \((x_{1}, \ldots, x_{d}) \leqslant (y_{1}, \ldots,
+	y_{d})\) if and only if, for each \(i \in \{1, \ldots, d\}\), one of the
+	following holds:
+	\[ x_{i} = y_{i} = \omega \qquad \text{or} \qquad x_{i} \in \mathbb{N} \
+	\wedge \ y_{i} = \omega \qquad \text{or} \qquad x_{i}, y_{i} \in \mathbb{N}
+	\ \wedge \ x_{i} \leqslant y_{i} \text{.} \]
+	By Dickson's lemma, this structure is a well-quasi-order because
+	\((\mathbb{N} \cup \{\omega\}, \leqslant)\) is itself a well-quasi-order.
+	
+	\medskip
+	
+	For any tuple \((x_{1}, \ldots, x_{d}) \in (\mathbb{N} \cup
+	\{\omega\})^{d}\), we say \((x_{1}, \ldots, x_{d}) \in X\) if and only if,
+	for every \(n \in \mathbb{N}\), the following condition holds:
+	\[ ([x_{1} = \omega] \cdot n + [x_{1} \neq \omega] \cdot x_{1}, \ldots,
+	[x_{d} = \omega] \cdot n + [x_{d} \neq \omega] \cdot x_{1}) \ \in \ X
+	\text{,} \]
 	where \([P]\) denotes the Iverson bracket, i.e., \([P] = 1\) if \(P\) is
-	true, and \([P] = 0\) otherwise. A set \(A\) is called \textit{good} if and
-	only if \(f_{A}(n) \in X\) for every \(n \in \mathbb{N}\). Note that
-	\(\emptyset\) is good unless \(X\) is empty, which is a trivial case.
+	true, and \([P] = 0\) otherwise.
 	
 	\medskip
 	
-	For any good set \(A \subseteq \{1, \ldots, d\}\), let \(g(A)\) denote the
-	set of tuples \((a_{1}, \ldots, a_{d})\) satisfying the following conditions:
+	A subset \(A \subseteq \{1, \ldots, d\}\) is called \textit{good} if and
+	only if \(([1 \in A] \cdot \omega, \ldots, [d \in A] \cdot \omega) \in X\).
+	For any good set \(A\), define \(g(A)\) as the set of tuples \((x_{1},
+	\ldots, x_{d}) \in (\mathbb{N} \cup \{\omega\})^{d}\) satisfying:
 	\begin{enumerate}
-		\item \(a_{i} = 0\), if \(i \in A\);
-		\item \(\underset{n \in \mathbb{N}}{\forall} \ (a_{1}, \ldots, a_{d}) +
-		      f_{A}(n) \in X\);
-		\item \(\underset{n_{0} \in \mathbb{N}}{\exists} \ \underset{n \geqslant
-		      n_{0}}{\forall} \ \underset{i \in \{1, \ldots, d\} \setminus A}
-		      {\forall} \ (a_{1}, \ldots, a_{i - 1}, a_{i} + 1, a_{i + 1},
-		      \ldots, a_{d}) + f_{A}(n) \notin X\),
+		\item \(x_{i} = \omega\), for all \(i \in A\);
+		\item \((x_{1}, \ldots, x_{d}) \in X\);
+		\item \((x_{1}, \ldots, x_{i - 1}, x_{i} + 1, x_{i + 1}, \ldots, x_{d})
+		      \notin X\), for all \(i \in \{1, \ldots, d\} \setminus A\).
 	\end{enumerate}
-	where \((a_{1}, \ldots, a_{d}) + (b_{1}, \ldots, b_{d}) = (a_{1} + b_{1},
-	\ldots, a_{d} + b_{d})\), for any tuples \((a_{1}, \ldots, a_{d})\) and
-	\((b_{1}, \ldots, b_{d})\) in \(\mathbb{N}^{d}\).
-	
-	\medskip
 	
 	Suppose, for the sake of contradiction, that \(g(A)\) is infinite. Let
-	\[ g(A) \ = \ \big\{ \big( a_{1}^{1}, \ldots, a_{d}^{1} \big), \big(
-	a_{1}^{2}, \ldots, a_{d}^{2} \big), \ldots \big\} \]
-	By Dickson's lemma, the structure \(\big( \mathbb{N}^{d}, \leqslant \!\!
-	\big)\) is a well-quasi-order.  Therefore, there exist indices \(i, j \in
-	\mathbb{N}\) such that \(i < j\) and \(\big( a_{1}^{i}, \ldots, a_{d}^{i}
-	\big) \leqslant \big( a_{1}^{j}, \ldots, a_{d}^{j} \big)\), contradicting
-	the third condition for tuples in \(g(A)\).
+	\[ g(A) \ = \ \big\{ \big( x_{1}^{1}, \ldots, x_{d}^{1} \big), \big(
+	x_{1}^{2}, \ldots, x_{d}^{2} \big), \ldots \big\} \text{.} \]
+	Since \(\big( (\mathbb{N} \cup \{\omega\})^{d}, \leqslant \! \big)\) is a
+	well-quasi-order, there exist indices \(i, j \in \mathbb{Z}^{+}\) such that
+	\(i < j\) and \(\big( x_{1}^{i}, \ldots, x_{d}^{i} \big) \leqslant \big(
+	x_{1}^{j}, \ldots, x_{d}^{j} \big)\), contradicting the third condition for
+	tuples in \(g(A)\).
 	
 	\medskip
 	
-	Define \(\text{down}(g(A))\) as the set of all tuples \((b_{1}, \ldots,
-	b_{d}) \in \mathbb{N}^{d}\) such that there exists a tuple \((a_{1}, \ldots,
-	a_{d}) \in g(A)\) with \((a_{1}, \ldots, a_{d}) \geqslant (b_{1}, \ldots,
-	b_{d})\). If \(g(A)\) is empty, let \(\text{down}(g(A))\) be the singleton
-	containing the zero tuple.
+	Define \(\text{down}(g(A))\) as the set of all tuples \((y_{1}, \ldots,
+	y_{d}) \in \mathbb{N}^{d}\) for which there exists a tuple \((x_{1}, \ldots,
+	x_{d}) \in g(A)\) such that \((x_{1}, \ldots, x_{d}) \geqslant (y_{1},
+	\ldots, y_{d})\) and \(y_{i} = 0\) for all \(i \in A\). If \(g(A)\) is
+	empty, let \(\text{down}(g(A))\) be the singleton containing the zero tuple.
+	The set \(\text{down}(g(A))\) is finite, with an upper bound on its size:
+	\[ |\text{down}(g(A))| \ \leqslant \ \sum\limits_{(x_{1}, \ldots, x_{d}) \in
+	g(A)} \ \prod\limits_{i \in \{1, \ldots, d\} \setminus A} (x_{i} + 1)
+	\text{.} \]
 	
-	\medskip
-	
-	The set \(\text{down}(g(A))\) is finite, with the following upper bound on
-	its size:
-	\[ |\text{down}(g(A))| \ \leqslant \ \sum\limits_{(a_{1}, \ldots, a_{d}) \in
-	g(A)} \ \prod\limits_{i = 1}^{d} (a_{i} + 1) \text{.} \]
 	Using this, define a semilinear set
 	\[ Y \ = \ \bigcup_{A \subseteq \{1, \ldots, d\} \ \wedge \ A \
 	\text{is good}} \left( \text{down}(g(A)) + \left( \bigcup_{i \in A}
 	([1 = i], \ldots, [d = i]) \right)^{\ast} \right) \text{.} \]
-	By definition of \(g(A)\), we have \(Y \subseteq X\). Our goal is to show
+	By definition of \(g(A)\), we have \(Y \subseteq X\). Our goal is to prove
 	that \(Y = X\).
 	
 	\medskip
 	
-	Suppose, for the sake of contradiction, that there exists a tuple \((a_{1},
-	\ldots, a_{d}) \in X \setminus Y\). We will construct a tuple \((b_{1},
-	\ldots, b_{d}) \in X\) such that \((b_{1}, \ldots, b_{d}) \geqslant (a_{1},
-	\ldots, a_{d})\). Since \(Y\) is downward closed, this will imply \((b_{1},
-	\ldots, b_{d}) \in X \setminus Y\).
+	Suppose, for the sake of contradiction, that there exists a tuple \((x_{1},
+	\ldots, x_{d}) \in X \setminus Y\). We will construct a tuple \((y_{1},
+	\ldots, y_{d}) \in \mathbb{N}^{d}\) such that \((x_{1}, \ldots, x_{d})
+	\leqslant (y_{1}, \ldots, y_{d})\) and \((y_{1}, \ldots, y_{d}) \in X\).
+	Since \(Y\) is downward closed, this will imply \((y_{1}, \ldots, y_{d}) \in
+	X \setminus Y\).
 	
 	\medskip
 	
-	Proceed through indices \(i = 1, \ldots, d\), choosing \(b_{i}\) iteratively
-	while maintaining a set \(A\), initially empty. Assume \(b_{1}, \ldots,
-	b_{i - 1}\) have been chosen. For all \(j \in \{1, \ldots, i - 1\}\), define
-	\(b_{j}' = b_{j}\) if \(j \in A\), and \(b_{j}' = 0\) otherwise. If there
-	exists a number \(c_{i} \in \mathbb{N}\) such that
-	\begin{itemize}
-		\item \(\underset{n \in \mathbb{N}}{\forall} \ (b_{1}', \ldots,
-		      b_{i - 1}', c_{i}, a_{i + 1}, \ldots, a_{d}) + f_{A}(n) \in X\),
-		      and
-		\item \(\underset{n_{0} \in \mathbb{N}}{\exists} \ \underset{n \geqslant
-		      n_{0}}{\forall} \ (b_{1}', \ldots, b_{i - 1}', c_{i} + 1,
-		      a_{i + 1}, \ldots, a_{d}) + f_{A}(n) \notin X\),
-	\end{itemize}
-	set \(b_{i} = c_{i}\). Otherwise, let \(b_{i} = a_{i}\) and add \(i\) to
-	\(A\). Note that \(b_{i} \geqslant a_{i}\).
+	Proceed through indices \(i = 1, \ldots, d\), choosing \(y_{i}\) iteratively
+	while maintaining a set \(A\), initially empty. Assume \(y_{1}, \ldots,
+	y_{i - 1}\) have been chosen. For all \(j \in \{1, \ldots, i - 1\}\), define
+	\(y_{j}' = \omega\) if \(j \in A\), and \(y_{j}' = y_{j}\) otherwise. If
+	there exists a number \(z_{i} \in \mathbb{N}\) such that
+	\[ (y_{1}', \ldots, y_{i - 1}', z_{i}, x_{i + 1}, \ldots, x_{d}) \ \in \ X
+	\qquad \text{and} \qquad (y_{1}', \ldots, y_{i - 1}', z_{i} + 1, x_{i + 1},
+	\ldots, x_{d}) \ \notin \ X \text{,} \]
+	set \(y_{i} = z_{i}\). Otherwise, let \(y_{i} = x_{i}\) and add \(i\) to
+	\(A\). Note that \(y_{i} \geqslant x_{i}\).
 	
 	\medskip
 	
-	By construction, \((b_{1}, \ldots, b_{d}) \in X\), and \(A\) is good.
+	By construction, \((y_{1}, \ldots, y_{d}) \in X\), and \(A\) is good.
 	Furthermore,
-	\[ \underset{n_{0} \in \mathbb{N}}{\exists} \ \underset{n \geqslant n_{0}}
-	{\forall} \ \underset{i \in \{1, \ldots, d\} \setminus A} {\forall} \
-	(b_{1}, \ldots, b_{i - 1}, b_{i} + 1, b_{i + 1}, \ldots, b_{d}) + f_{A}(n)
-	\notin X \text{.} \]
-	Thus,
-	\[ (b_{1}, \ldots, b_{d}) \ \in \ \text{down}(g(A)) + \left(
+	\[ \underset{i \in \{1, \ldots, d\} \setminus A} {\forall} \ (y_{1}',
+	\ldots, y_{i - 1}', y_{i} + 1, y_{i + 1}', \ldots, y_{d}') \notin X
+	\text{,} \]
+	where \(y_{j}'\) is as defined earlier. Thus,
+	\[ (y_{1}, \ldots, y_{d}) \ \in \ \text{down}(g(A)) + \left(
 	\bigcup_{i \in A} ([1 = i], \ldots, [d = i]) \right)^{\ast} \text{.} \]
 	This contradiction completes the proof that \(X\) is a semilinear set.
+	
+	\medskip
+	
+	Now we proceed to the second part of the problem. Let \(T \subseteq
+	\mathbb{Z}^{d}\) be the set of available transitions. Define \(X\) as the
+	downward closure of configurations reachable from \(x\).
+	
+	\medskip
+	
+	Consider a directed graph \(G\) where \(V(G) = (\mathbb{N} \cup
+	\{\omega\})^{d}\) and \(E(G)\) contains pairs \(((y_{1}, \ldots, y_{d}),
+	\allowbreak (z_{1}, \ldots, z_{d}))\) such that there exists a transition
+	\((t_{1}, \ldots, t_{d}) \in T\) satisfying:
+	\[ y_{i} = z_{i} = \omega \qquad \text{or} \qquad y_{i}, z_{i} \in
+	\mathbb{N} \ \wedge \ y_{i} + t_{i} = z_{i} \text{,} \]
+	for each \(i \in \{1, \ldots, d\}\). Run a breadth-first search (BFS) on
+	this graph, starting at vertex \(x\).
+	
+	\medskip
+	
+	Whenever a vertex \((y_{1}, \ldots, y_{d})\) is encountered such that there
+	exists an ancestor \((z_{1}, \ldots, z_{d})\) in the BFS-tree with \((z_{1},
+	\ldots, z_{d}) \leqslant (y_{1}, \ldots, y_{d})\), perform the following:
+	\begin{enumerate}
+		\item For each \(i \in \{1, \ldots, d\}\), set \(y_{i}' = \omega\) if
+		\(y_{i} > z_{i}\), or \(y_{i}' = y_{i}\) otherwise;
+		\item If \((y_{1}', \ldots, y_{d}')\) has not been visited, add it to
+		      the BFS queue and mark it as visited;
+	\end{enumerate}
+	Note that \((y_{1}', \ldots, y_{d}') \geqslant (y_{1}, \ldots, y_{d})\), so
+	we do not need to process the neighbors of \((y_{1}, \ldots, y_{d})\). We do
+	this because if \((y_{1}, \ldots, y_{d})\) and \((z_{1}, \ldots, z_{d})\)
+	belong to \(X\), then \((y_{1}', \ldots, y_{d}')\) also belongs to \(X\).
+	
+	\medskip
+	
+	Suppose, for the sake of contradiction, that the BFS does not terminate.
+	Then there exists an infinite sequence of vertices:
+	\[ Y_{0} \ = \ \big( \big( y_{1}^{1}, \ldots, y_{d}^{1} \big), \big(
+	y_{1}^{2}, \ldots, y_{d}^{2} \big), \ldots, \big) \]
+	where each vertex \((y_{1}^{i}, \ldots, y_{d}^{i})\) is the parent of the
+	next. Since \(\big( (\mathbb{N} \cup \{\omega\})^{d}, \leqslant \big)\) is a
+	well-quasi-order, there exist indices \(i, j \in \mathbb{Z}^{+}\) with \(i <
+	j\) such that \(\big( y_{1}^{i}, \ldots, y_{d}^{i} \big) \leqslant \big(
+	y_{1}^{j}, \ldots, y_{d}^{j} \big)\). Now consider the sequence:
+	\[ Y_{1} \ = \ \big( \big( y_{1}^{j}, \ldots, y_{d}^{j} \big), \big(
+	y_{1}^{j + 1}, \ldots, y_{d}^{j + 1} \big), \ldots, \big) \text{.} \]
+	In this sequence, each tuple has at least one element equal to \(\omega\).
+	Repeating this argument produces sequences \(Y_{2}, Y_{3}, \ldots\), where
+	each tuple in \(Y_{k}\) contains at least \(k\) elements equal to
+	\(\omega\). The existence of \(Y_{d + 1}\) leads to a contradiction.
+	Therefore, the BFS terminates
+	
+	\medskip
+	
+	Let \(S\) be the set of visited vertices. The answer is:
+	\[ X \ = \ \bigcup_{y \in S} \Bigg( \text{down}(\{y\}) + \Bigg( \bigcup_{i
+	\in \{1, \ldots, d\} \ \wedge \ y_{i} = \omega} ([1 = i], \ldots, [d = i])
+	\Bigg)^{\ast} \Bigg) \text{.} \]
+	The algorithm is correct because for every \(y\) coverable by \(x\), there
+	exists \(y' \in S\) such that \(y' \geqslant y\).
 \end{document}

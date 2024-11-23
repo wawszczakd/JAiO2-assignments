@@ -272,4 +272,101 @@
 	\Bigg)^{\ast} \Bigg) \text{.} \]
 	The algorithm is correct because for every \(y\) coverable by \(x\), there
 	exists \(y' \in S\) such that \(y' \geqslant y\).
+	
+	\bigskip
+	
+	\textbf{Problem 4}
+	
+	\medskip
+	
+	This problem was solved in collaboration with Kacper Bal and Mateusz
+	Mroczka.
+	
+	\medskip
+	
+	To begin, we construct an injection \(f : \{0, 1\}^{\ast} \to \mathbb{N}\),
+	defined as:
+	\[ f(s) \ = \ 2^{n} + \sum\limits_{i = 0}^{n - 1} [s[i + 1] = 1] \times
+	2^{i} \text{,} \]
+	where \(s\) is a string of length \(n\). Note that every natural number
+	except \(0\) lies in the image of this function.
+	
+	\medskip
+	
+	We will utilize the following formulas:
+	\begin{align*}
+		\psi_{\text{zero}}(a) \ &\coloneqq \ \underset{b \in \mathbb{N}}
+		{\forall} \ a + b = b \text{,} \\
+		\psi_{\text{one}}(a) \ &\coloneqq \ \underset{b \in \mathbb{N}}{\forall}
+		\ a \times b = b \text{,} \\
+		\psi_{\text{even}}(a) \ &\coloneqq \ \underset{b \in \mathbb{N}}
+		{\exists} \ a = b + b \text{,} \\
+		\psi_{\text{pow2}}(a) \ &\coloneqq \ \underset{b \in \mathbb{N}}
+		{\forall} \left( \left( \neg \psi_{\text{zero}}(b) \ \wedge \
+		\underset{c \in \mathbb{N}}{\exists} \ b \times c = a \right) \
+		\Rightarrow \ (\psi_{\text{even}}(b) \ \vee \ \psi_{\text{one}}(b))
+		\right) \text{,} \\
+		\psi_{\leqslant}(a, b) \ &\coloneqq \ \underset{c \in \mathbb{N}}
+		{\exists} \ a + c = b \text{,} \\
+		\psi_{<}(a, b) \ &\coloneqq \ \underset{c \in \mathbb{N}}{\exists} \ (a
+		+ c = b \ \wedge \ \neg \psi_{\text{zero}}(c)) \text{,} \\
+		\psi_{\text{log}}(a, b) \ &\coloneqq \ \psi_{\text{pow2}}(b) \ \wedge \
+		\psi_{\leqslant}(b, a) \ \wedge \ \psi_{<}(a, 2 \times b) \text{.}
+	\end{align*}
+	
+	Next, we construct a function \(g\) that transforms a first-order logic
+	sentence \(\varphi(s_{1}, \ldots, s_{m})\) over the free monoid
+	\(\big(\{0, 1\}^{\ast}, \cdot, 0, 1 \big)\) into a sentence \(\psi(a_{1},
+	\ldots, a_{m})\) over the arithmetic structure \((\mathbb{N}, +, \times)\).
+	This transformation ensures that \(\varphi(s_{1}, \ldots, s_{m})\) is true
+	if and only if \(\psi(a_{1}, \ldots, a_{m})\) is true.
+	
+	\medskip
+	
+	The function \(g\) is defined as follows:
+	\begin{align*}
+		g \left( \underset{s \in \{0, 1\}^{\ast}}{\forall} \ \varphi'(s, s_{1}',
+		\ldots, s_{m'}') \right) \ &\coloneqq \ \underset{a \in \mathbb{N}}
+		{\forall} \ (\neg \psi_{\text{zero}}(a) \ \wedge \ g(\varphi'(s, s_{1}',
+		\ldots, s_{m'}'))) \text{,} \\[0.2 cm]
+		g \left( \underset{s \in \{0, 1\}^{\ast}}{\exists} \ \varphi'(s, s_{1}',
+		\ldots, s_{m'}') \right) \ &\coloneqq \ \underset{a \in \mathbb{N}}
+		{\exists} \ (\neg \psi_{\text{zero}}(a) \ \wedge \ g(\varphi'(s, s_{1}',
+		\ldots, s_{m'}'))) \text{,} \\[0.2 cm]
+		g(\varphi'(s_{1}', \ldots, s_{m'}') \ \wedge \ \varphi''(s_{1}'',
+		\ldots, s_{m''}'')) \ &\coloneqq \ g(\varphi'(s_{1}', \ldots, s_{m'}'))
+		\ \wedge \ g(\varphi''(s_{1}'', \ldots, s_{m''}'')) \text{,} \\[0.2 cm]
+		g(\varphi'(s_{1}', \ldots, s_{m'}') \ \vee \ \varphi''(s_{1}'', \ldots,
+		s_{m''}'')) \ &\coloneqq \ g(\varphi'(s_{1}', \ldots, s_{m'}')) \ \vee \
+		g(\varphi''(s_{1}'', \ldots, s_{m''}'')) \text{,} \\[0.2 cm]
+		g(\neg \varphi'(s_{1}', \ldots, s_{m'}')) \ &\coloneqq \ \neg
+		g(\varphi'(s_{1}', \ldots, s_{m'}')) \text{.}
+	\end{align*}
+	
+	The remaining case involves sentences of the form \(s_{1}' \cdot \ldots
+	\cdot s_{m'}' = s_{1}'' \cdot \ldots \cdot s_{m''}''\). Without loss of
+	generality, we assume these are reduced to \(s \cdot t = u\). Let \(a_{s}\)
+	be defined as follows: if \(s\) is a variable, \(a_{s}\) is the
+	corresponding variable; if \(s\) is a constant, \(a_{s}\) is \(f(s)\); and
+	if \(s\) is an argument, \(a_{s}\) is the corresponding argument. The values
+	\(a_{t}\) and \(a_{u}\) are defined analogously. Define:
+	\[ g(s \cdot t = u) \ \coloneqq \ \underset{b_{t} \in \mathbb{N}}{\exists} \
+	\left( \psi_{\text{log}}(a_{t}, b_{t}) \ \wedge \ b_{t} \times a_{s} + a_{t}
+	= a_{u} + b_{t} \right) \text{.} \]
+	The term \(b_{t}\) represents the most significant bit of \(a_{t}\).
+	Ideally, we would express the equation as \(b_{t} \times a_{s} + (a_{t} -
+	b_{t}) = a_{u}\), but since subtraction is not available in this framework,
+	we add \(b_{t}\) to the right-hand side instead.
+	
+	\medskip
+	
+	Finally, for each argument \(a_{i}\) of \(\psi\), we impose the restriction
+	\(\neg \psi_{\text{zero}}(a_{i})\).
+	
+	\medskip
+	
+	By this construction, \(\varphi(s_{1}, \ldots, s_{m})\) is true if and only
+	if its transformed counterpart \(g(\varphi(s_{1}, \ldots, \allowbreak
+	s_{m})) = \psi(a_{1}, \ldots, a_{m})\) is also true, thus completing the
+	proof.
 \end{document}

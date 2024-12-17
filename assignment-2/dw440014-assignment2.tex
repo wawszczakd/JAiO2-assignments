@@ -1,0 +1,67 @@
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{indentfirst}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{natbib}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage[a4paper, margin = 2 cm]{geometry}
+\usepackage{fancyhdr}
+\usepackage{wrapfig}
+\usepackage{hyperref}
+\usepackage{mathtools}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+
+\title{Languages, Automata and Computation II assignment 2}
+\author{Dominik Wawszczak}
+\date{2024-12-17}
+
+\begin{document}
+	\setlength{\parindent}{0 cm}
+	
+	Dominik Wawszczak \hfill Languages, Automata and Computation II
+	
+	Student ID Number: 440014 \hfill Assignment 2
+	
+	Group Number: 1
+	
+	\bigskip
+	\hrule
+	\bigskip
+	
+	\textbf{Problem 1}
+	
+	\medskip
+	
+	For any \(w \in \Sigma^{\ast}\), let \(P_{w}(x)\) denote the polynomial
+	obtained by feeding \(w\) into the automaton. By definition, this function
+	is a polynomial in one variable \(x\). Let \(X\) be the set defined in the
+	problem statement.
+	
+	\medskip
+	
+	We consider two cases:
+	\begin{enumerate}
+		\item There exists a word \(w \in \Sigma^{\ast}\) such that \(P_{w}(x)\)
+		      is not the zero polynomial.
+		      
+		      In this case, let \(R(P_{w})\) represent the set of roots of
+		      \(P_{w}(x)\). Since \(P_{w}(x)\) is not identically zero,
+		      \(R(P_{w})\) is finite. Furthermore, \(X\) must be a subset of
+		      \(R(P_{w})\); otherwise, there would exist some \(x \in X\) for
+		      which \(P_{w}(x) \neq 0\), contradicting the definition of \(X\).
+		      Thus, \(X\) is finite.
+		
+		\item For every word \(w \in \Sigma^{\ast}\), \(P_{w}(x)\) is the zero
+		      polynomial.
+		      
+		      In this scenario, \(P_{w}(x) = 0\) holds for all \(x \in
+		      \mathbb{Q}\) and every \(w \in \Sigma^{\ast}\). Consequently, \(X
+		      = \mathbb{Q}\).
+	\end{enumerate}
+	From these cases, we conclude that \(X\) is either finite or equal to
+	\(\mathbb{Q}\), completing the proof.
+\end{document}

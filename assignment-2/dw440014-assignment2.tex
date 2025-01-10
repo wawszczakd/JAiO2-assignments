@@ -64,4 +64,78 @@
 	\end{enumerate}
 	From these cases, we conclude that \(X\) is either finite or equal to
 	\(\mathbb{Q}\), completing the proof.
+	
+	\bigskip
+	
+	\textbf{Problem 2}
+	
+	\medskip
+	
+	This problem was solved in collaboration with Kacper Bal and Mateusz
+	Mroczka.
+	
+	\medskip
+	
+	Let \(\mathcal{A}\) denote the automaton from the problem statement, with
+	dimension \(d\) and alphabet \(\Sigma\). For any \(a \in \Sigma\), let
+	\(M_{a} \in \mathbb{Q}^{d \times d}\) represent the matrix corresponding to
+	the transition function for symbol \(a\).
+	
+	\medskip
+	
+	We will construct a polynomial automaton \(\mathcal{B}\) that defines a
+	function \(g : \Sigma^{\ast} \to \mathbb{Q}\). The goal is for this function
+	to satisfy the property that, for any word \(w \in \Sigma^{\ast}\), \(g(w) =
+	f(w_{\text{lex}})\), where \(w_{\text{lex}}\) is \(w\) sorted
+	lexicographically, and \(f\) is the function computed by \(\mathcal{A}\).
+	
+	\medskip
+	
+	Assume \(\Sigma = \{a_{1}, a_{2}, \ldots, a_{k}\}\), where \(a_{1}
+	<_{\text{lex}} a_{2} <_{\text{lex}} \ldots <_{\text{lex}} a_{k}\). Denote
+	the initial state of \(\mathcal{A}\) as \(q_{\text{ini}} \in
+	\mathbb{Q}^{1 \times d}\), and the final mapping as \(q_{\text{fin}} \in
+	\mathbb{Q}^{d \times 1}\). According to the definition of a weighted
+	automaton, for any \(w \in \Sigma^{\ast}\) such that \(w = w_{1} w_{2}
+	\ldots w_{n}\), it holds that \(f(w) = q_{\text{ini}} \cdot M_{w_{1}} \cdot
+	M_{w_{2}} \cdot \ldots \cdot M_{w_{n}} \cdot q_{\text{fin}}\). Therefore, it
+	should also hold that
+	\[ g(w) \ = \ q_{\text{ini}} \cdot M_{a_{1}}^{\#_{a_{1}}(w)} \cdot
+	M_{a_{2}}^{\#_{a_{2}}(w)} \cdot \ldots \cdot M_{a_{k}}^{\#_{a_{k}}(w)} \cdot
+	q_{\text{fin}} \text{.} \]
+	
+	\medskip
+	
+	The automaton \(\mathcal{B}\) will have dimension \(d^{2} \cdot k\). The
+	first \(d^{2}\) coordinates will correspond to \(M_{a_{1}}\) raised to the
+	power of the number of letters \(a_{1}\) read so far, the next \(d^{2}\)
+	coordinates to \(M_{a_{2}}\), and so on. In the initial state of
+	\(\mathcal{B}\), we store the identity matrix \(I\) for each letter
+	\(a_{i}\) in the alphabet.
+	
+	\medskip
+	
+	For any \(a \in \Sigma\), the transition matrix simulates matrix
+	multiplication by \(M_{a}\) on the appropriate coordinates, while the other
+	coordinates remain unchanged. Note that this requires only linear mappings.
+	
+	\medskip
+	
+	Once the values \(M_{a_{1}}^{\#_{a_{1}}(w)}, M_{a_{2}}^{\#_{a_{2}}(w)},
+	\ldots, M_{a_{k}}^{\#_{a_{k}}(w)}\) have been computed and stored in the
+	state, we need to calculate the final value
+	\[ q_{\text{ini}} \cdot M_{a_{1}}^{\#_{a_{1}}(w)} \cdot
+	M_{a_{2}}^{\#_{a_{2}}(w)} \cdot \ldots \cdot M_{a_{k}}^{\#_{a_{k}}(w)} \cdot
+	q_{\text{fin}} \text{.} \]
+	This is a polynomial involving \(d^{2} \cdot k\) variables, which are the
+	elements of the matrices stored in the state. Hence, the automaton
+	\(\mathcal{B}\) can compute this, making it the only non-linear transition.
+	
+	\medskip
+	
+	Since \(\mathcal{A}\) is also a polynomial automaton (as linear functions
+	are polynomials), we can use the algorithm presented in the lecture to
+	determine whether \(\mathcal{A}\) and \(\mathcal{B}\) are equivalent. If
+	they are, the function \(f\) is commutative; otherwise, it is not, which
+	concludes the proof.
 \end{document}

@@ -138,4 +138,56 @@
 	determine whether \(\mathcal{A}\) and \(\mathcal{B}\) are equivalent. If
 	they are, the function \(f\) is commutative; otherwise, it is not, which
 	concludes the proof.
+	
+	\bigskip
+	
+	\textbf{Problem 3}
+	
+	\medskip
+	
+	This problem was solved in collaboration with Kacper Bal and Mateusz
+	Mroczka.
+	
+	\medskip
+	
+	Since weighted automata are a special case of polynomial automata, we only
+	need to show that if a polynomial automaton \(\mathcal{A}\) computes a
+	function \(f : \Sigma^{\ast} \to \mathbb{F}\), then there exists a weighted
+	automaton \(\mathcal{B}\) that computes the same function.
+	
+	\medskip
+	
+	Let \(d\) be the dimension of \(\mathcal{A}\). We set the dimension of
+	\(\mathcal{B}\) to \(D = |\mathbb{F}|^{d}\), which represents the number of
+	possible states \(\mathcal{A}\) can be in. The invariant for \(\mathcal{B}\)
+	is that it will always have exactly one coordinate equal to \(1\), with the
+	rest set to \(0\). This coordinate corresponds to the state of
+	\(\mathcal{A}\). In the initial state of \(\mathcal{B}\), represented as a
+	vector in \(\mathbb{F}^{1 \times D}\), the coordinate corresponding to the
+	initial state of \(\mathcal{A}\) is set to \(1\), with all others set to
+	\(0\).
+	
+	\medskip
+	
+	For any \(a \in \Sigma\), let \(M_{a} \in
+	\mathbb{F}[x_{1}, x_{2}, \ldots, x_{d}]^{d}\) be the transition polynomials
+	for the letter \(a\). Since for every \((x_{1}, x_{2}, \ldots, x_{d}) \in
+	\mathbb{F}^{d}\), the result of applying the transition \(M_{a}\) to
+	\((x_{1}, x_{2}, \ldots, x_{d})\) is uniquely determined, we define the
+	transition function of \(\mathcal{B}\) as a \(D \times D\) matrix. The entry
+	at position \((i, j)\) is \(1\) if and only if applying \(M_{a}\) to
+	\((x_{1}, x_{2}, \ldots, x_{d})\) results in \((y_{1}, y_{2}, \ldots,
+	y_{d})\), where \(i\) corresponds to \((x_{1}, x_{2}, \ldots, x_{d})\) and
+	\(j\) corresponds to \((y_{1}, y_{2}, \ldots, y_{d})\); otherwise, the entry
+	is \(0\). This construction maintains the invariant of \(\mathcal{B}\) and
+	ensures correct transitions.
+	
+	\medskip
+	
+	The final mapping of \(\mathcal{B}\) is a vector in
+	\(\mathbb{F}^{D \times 1}\). The entry at position \(i\) is \((x_{1}, x_{2},
+	\ldots, x_{d}) \cdot q_{\text{fin}}\), where \(i\) corresponds to \((x_{1},
+	x_{2}, \ldots, x_{d})\), and \(q_{\text{fin}}\) is the final mapping of
+	\(\mathcal{A}\). With this construction, automata \(\mathcal{A}\) and
+	\(\mathcal{B}\) compute the same function, thus completing the proof.
 \end{document}

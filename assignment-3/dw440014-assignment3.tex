@@ -78,4 +78,50 @@
 	
 	Since both the problem and its complement are semi-decidable, the problem is
 	decidable, which completes the proof.
+	
+	\bigskip
+	
+	\textbf{Problem 2}
+	
+	\medskip
+	
+	This problem was solved in collaboration with Kacper Bal and Mateusz
+	Mroczka.
+	
+	\begin{enumerate}
+		\item Let \(L = \{b^{\ast} a\}^{\omega}\), and \(w = b^{\omega}\).
+		      Clearly, \(w \notin L\), but any finite prefix of \(w\) can be
+		      extended to a word in \(L\) by concatenating it with
+		      \(a^{\omega}\). Therefore, \(L\) is \(\omega\)-regular, but not
+		      closed, which concludes the proof.
+		
+		\item Let \(w = a^{1} b^{1} a^{2} b^{2} a^{3} b^{3} \ldots\), and \(L =
+		      \{w\}\). As shown in the tutorial, \(L\) is not
+		      \(\omega\)-regular. To prove that it is closed, consider any \(v
+		      \in \Sigma^{\omega}\) different from \(w\). Let \(n \in
+		      \mathbb{N}\) be the smallest index at which \(w\) and \(v\)
+		      differ. Then, the prefix of \(v\) of length \(n + 1\) (assuming
+		      \(0\)-indexing) cannot be extended to an \(\omega\)-word in \(L\).
+		      Additionally, any finite prefix of \(w\) can be extended to \(w\).
+		      Hence, \(L\) is closed, which completes the proof.
+		
+		\item We can construct a parity automaton that is equivalent to the
+		      Büchi automaton from the input, as discussed in the lecture. Let
+		      \(\mathcal{A}\) be this parity automaton, and let \(A\) be the set
+		      of states from which there exists an accepting run. For each state
+		      \(q\), we can verify whether \(q \in A\) by setting the initial
+		      state to \(q\) and checking for nonemptiness.
+		      
+		      Let \(\mathcal{A}'\) be the automaton obtained from
+		      \(\mathcal{A}\) by keeping only the states in \(A\), and
+		      increasing every weight by one. By checking the nonemptiness of
+		      \(\mathcal{A}'\), we can determine whether there exists a run in
+		      \(\mathcal{A}\) that visits only the states from \(A\) but is not
+		      accepting. If such a run exists, the language \(L(\mathcal{A})\)
+		      is not closed, as there exists an \(\omega\)-word corresponding to
+		      this run, whose every finite prefix can be extended to an
+		      \(\omega\)-word in \(L(\mathcal{A})\), but which is not in the
+		      language itself. If no such run exists, the language is closed,
+		      which concludes the proof.
+	\end{enumerate}
 \end{document}

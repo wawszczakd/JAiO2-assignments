@@ -1,0 +1,81 @@
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{indentfirst}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{natbib}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage[a4paper, margin = 2 cm]{geometry}
+\usepackage{fancyhdr}
+\usepackage{wrapfig}
+\usepackage{hyperref}
+\usepackage{mathtools}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+
+\title{Languages, Automata and Computation II assignment 3}
+\author{Dominik Wawszczak}
+\date{2025-01-31}
+
+\begin{document}
+	\setlength{\parindent}{0 cm}
+	
+	Dominik Wawszczak \hfill Languages, Automata and Computation II
+	
+	Student ID Number: 440014 \hfill Assignment 3
+	
+	Group Number: 1
+	
+	\bigskip
+	\hrule
+	\bigskip
+	
+	\textbf{Problem 1}
+	
+	\medskip
+	
+	This problem was solved in collaboration with Kacper Bal and Mateusz
+	Mroczka.
+	
+	\medskip
+	
+	We say that a language \(L \in \mathbb{A}^{*}\) is a \textit{good}, if it
+	satisfies the condition from the statement, i.e.
+	\[ \underset{w \in \mathbb{A}^{\ast}}{\forall} \
+	\underset{\sigma : \mathbb{A} \to \mathbb{A}}{\forall} \ (w \in L \ \iff \
+	\sigma(w) \in L) \text{.} \]
+	
+	\medskip
+	
+	Let \(A \in \mathbb{A}\) be an arbitrary element. Define \(\sigma_{A}\) as
+	the function constantly equal to \(A\). For any good language \(L \in
+	\mathbb{A}^{\ast}\), it must hold that
+	\[ \underset{w \in \mathbb{A}^{\ast}}{\forall} \ (w \in L \ \iff \
+	\sigma_{A}(w) \in L) \text{,} \]
+	since the order of quantifiers does not matter. This is equivalent to
+	\[ \underset{w \in \mathbb{A}^{\ast}}{\forall} \ \big( w \in L \ \iff \
+	A^{|w|} \in L \big) \text{,} \]
+	which implies that for every \(n \in \mathbb{N}\), \(L\) either contains all
+	words of length \(n\) or none of them.
+	
+	\medskip
+	
+	The problem of determining whether a language \(L \in \mathbb{A}^{\ast}\) is
+	good is semi-decidable, since we can iterate through register automata that
+	use zero registers, comparing each one with the automaton from the input.
+	
+	\medskip
+	
+	The complement of this problem is also semi-decidable, as we can iterate
+	over words of length \(n\), for \(n \in \mathbb{N}\), considering only a
+	subset of \(n\) symbols from \(\mathbb{A}\). For each such word, we can
+	check all the possible functions \(\sigma\) limited to this subset and
+	verify whether the condition holds.
+	
+	\medskip
+	
+	Since both the problem and its complement are semi-decidable, the problem is
+	decidable, which completes the proof.
+\end{document}
